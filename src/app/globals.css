@@ -137,6 +137,7 @@
   --animate-streak: streak 0.8s linear infinite;
   --animate-drift: drift 26s linear infinite;
   --animate-wheel: spin 0.55s linear infinite;
+  --animate-cross: cross 9s linear infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -182,6 +183,10 @@
   @keyframes drift {
     from { transform: translateX(8%); }
     to { transform: translateX(-12%); }
+  }
+  @keyframes cross {
+    0% { left: -42%; }
+    100% { left: 112%; }
   }
 }
 

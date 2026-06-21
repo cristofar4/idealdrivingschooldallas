@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
 import { TextReveal, Reveal } from "@/components/anim/reveal";
 import { Scene, type SceneKind, type SceneAccent } from "@/components/visuals/scene";
 
@@ -15,7 +13,6 @@ export function PageHero({
   description,
   scene = "road",
   accent = "gold",
-  crumb,
   children,
 }: {
   eyebrow: string;
@@ -24,7 +21,8 @@ export function PageHero({
   description?: string;
   scene?: SceneKind;
   accent?: SceneAccent;
-  crumb: string;
+  /** Kept for compatibility; breadcrumb is no longer shown. */
+  crumb?: string;
   children?: React.ReactNode;
 }) {
   return (
@@ -37,21 +35,6 @@ export function PageHero({
       <div className="absolute -right-20 top-10 -z-10 size-[24rem] rounded-full bg-gold/15 blur-[120px]" />
 
       <div className="container-px mx-auto max-w-[88rem]">
-        {/* breadcrumb */}
-        <motion.nav
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="mb-8 flex items-center gap-1.5 text-xs text-cream/50"
-          aria-label="Breadcrumb"
-        >
-          <Link href="/" className="transition-colors hover:text-gold">
-            Home
-          </Link>
-          <ChevronRight className="size-3" />
-          <span className="text-cream/80">{crumb}</span>
-        </motion.nav>
-
         <motion.span
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

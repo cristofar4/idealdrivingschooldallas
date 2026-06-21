@@ -64,30 +64,74 @@ function Car() {
   );
 }
 
-/** Animated side-view driving scene — spinning wheels, streaming road, gentle motion. */
-export function DrivingScene({ className }: { className?: string }) {
+/**
+ * Animated side-view driving scene — spinning wheels, headlight, gentle motion.
+ * - "feature": car centered, road streams underneath (treadmill effect).
+ * - "hero": full-width, the car actually drives across the screen on a darker sky.
+ */
+export function DrivingScene({
+  className,
+  mode = "feature",
+}: {
+  className?: string;
+  mode?: "feature" | "hero";
+}) {
+  const hero = mode === "hero";
+
   return (
     <div
       className={cn(
-        "relative overflow-hidden bg-gradient-to-b from-[#0a1430] via-[#15244a] to-[#2c2418]",
+        "relative overflow-hidden",
+        hero
+          ? "bg-gradient-to-b from-ink via-[#0b1630] to-[#160e05]"
+          : "bg-gradient-to-b from-[#0a1430] via-[#15244a] to-[#2c2418]",
         className,
       )}
       role="img"
       aria-label="A car driving down the road"
     >
       {/* sun + glow */}
-      <div className="absolute left-1/2 top-[16%] size-52 -translate-x-1/2 rounded-full bg-gold/35 blur-3xl" />
-      <div className="absolute left-1/2 top-[19%] size-20 -translate-x-1/2 rounded-full bg-gold-soft blur-lg" />
+      <div
+        className={cn(
+          "absolute left-1/2 -translate-x-1/2 rounded-full bg-gold/30 blur-3xl",
+          hero ? "top-[40%] size-72" : "top-[16%] size-52",
+        )}
+      />
+      {!hero && (
+        <div className="absolute left-1/2 top-[19%] size-20 -translate-x-1/2 rounded-full bg-gold-soft blur-lg" />
+      )}
 
-      {/* drifting clouds */}
-      <div className="absolute inset-x-0 top-[16%] animate-drift">
-        <div className="absolute left-[12%] h-5 w-24 rounded-full bg-white/10 blur-md" />
-        <div className="absolute left-[58%] top-6 h-4 w-20 rounded-full bg-white/10 blur-md" />
-        <div className="absolute left-[78%] h-6 w-28 rounded-full bg-white/[0.07] blur-md" />
-      </div>
+      {/* stars (hero) / drifting clouds (feature) */}
+      {hero ? (
+        <div className="absolute inset-x-0 top-0 h-1/2">
+          {Array.from({ length: 26 }).map((_, i) => (
+            <span
+              key={i}
+              className="absolute rounded-full bg-white"
+              style={{
+                left: `${(i * 167) % 100}%`,
+                top: `${(i * 53) % 90}%`,
+                width: `${(i % 3) + 1}px`,
+                height: `${(i % 3) + 1}px`,
+                opacity: 0.15 + (i % 4) * 0.12,
+              }}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="absolute inset-x-0 top-[16%] animate-drift">
+          <div className="absolute left-[12%] h-5 w-24 rounded-full bg-white/10 blur-md" />
+          <div className="absolute left-[58%] top-6 h-4 w-20 rounded-full bg-white/10 blur-md" />
+          <div className="absolute left-[78%] h-6 w-28 rounded-full bg-white/[0.07] blur-md" />
+        </div>
+      )}
 
       {/* distant skyline */}
-      <svg viewBox="0 0 400 80" preserveAspectRatio="none" className="absolute inset-x-0 bottom-[36%] h-16 w-full opacity-50">
+      <svg
+        viewBox="0 0 400 80"
+        preserveAspectRatio="none"
+        className={cn("absolute inset-x-0 w-full opacity-50", hero ? "bottom-[26%] h-14" : "bottom-[36%] h-16")}
+      >
         <g fill="#0a1124">
           {[
             [10, 40], [42, 24], [70, 50], [104, 16], [140, 44], [180, 30],
@@ -99,31 +143,46 @@ export function DrivingScene({ className }: { className?: string }) {
       </svg>
 
       {/* road */}
-      <div className="absolute inset-x-0 bottom-0 h-[36%] bg-gradient-to-b from-[#0c1018] to-[#05070d]">
+      <div
+        className={cn(
+          "absolute inset-x-0 bottom-0 bg-gradient-to-b from-[#0c1018] to-[#05070d]",
+          hero ? "h-[26%]" : "h-[36%]",
+        )}
+      >
         <div className="absolute inset-x-0 top-0 h-px bg-gold/30" />
         <div
-          className="animate-road absolute inset-x-0 top-[48%] h-1.5 opacity-90"
+          className={cn("absolute inset-x-0 top-[46%] h-1.5 opacity-90", !hero && "animate-road")}
           style={{
             backgroundImage: "repeating-linear-gradient(90deg,#f5c06a 0 28px,transparent 28px 56px)",
           }}
         />
       </div>
 
-      {/* speed streaks */}
-      <div className="absolute bottom-[40%] left-[10%] flex flex-col gap-3">
-        {[0, 1, 2].map((i) => (
-          <span
-            key={i}
-            className="animate-streak h-0.5 w-12 rounded-full bg-cream/60"
-            style={{ animationDelay: `${i * 0.18}s` }}
-          />
-        ))}
-      </div>
-
-      {/* the car */}
-      <div className="animate-bob absolute bottom-[29%] left-1/2 w-[66%] max-w-[420px] -translate-x-1/2">
-        <Car />
-      </div>
+      {hero ? (
+        // Car drives across the screen.
+        <div className="animate-cross absolute bottom-[19%] w-[30%] max-w-[340px]">
+          <div className="animate-bob">
+            <Car />
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* speed streaks */}
+          <div className="absolute bottom-[40%] left-[10%] flex flex-col gap-3">
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="animate-streak h-0.5 w-12 rounded-full bg-cream/60"
+                style={{ animationDelay: `${i * 0.18}s` }}
+              />
+            ))}
+          </div>
+          {/* car bobs in place */}
+          <div className="animate-bob absolute bottom-[29%] left-1/2 w-[66%] max-w-[420px] -translate-x-1/2">
+            <Car />
+          </div>
+        </>
+      )}
 
       {/* vignette */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(4,6,12,0.55))]" />

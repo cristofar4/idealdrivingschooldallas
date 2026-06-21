@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/anim/magnetic";
 import { TextReveal } from "@/components/anim/reveal";
 import { Counter } from "@/components/anim/counter";
-import { Scene } from "@/components/visuals/scene";
+import { DrivingScene } from "@/components/visuals/driving-scene";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -31,12 +31,12 @@ export function Hero() {
       ref={ref}
       className="dark relative flex min-h-[100svh] items-center overflow-hidden bg-ink pb-16 pt-28 text-cream"
     >
-      {/* Background scene + parallax */}
+      {/* Background driving scene + parallax */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 -z-20 scale-110">
-        <Scene kind="hero" accent="gold" />
+        <DrivingScene mode="hero" className="h-full w-full" />
       </motion.div>
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/80 to-ink/30" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-transparent to-ink/60" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/80 to-ink/35" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-transparent to-ink/35" />
       <div className="absolute inset-0 -z-10 bg-grid-dark opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
 
       {/* Aurora blobs */}

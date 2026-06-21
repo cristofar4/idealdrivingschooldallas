@@ -11,7 +11,7 @@ import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/anim/magnetic";
 
-const desktopLinks = navLinks.filter((l) => l.href !== "/");
+const desktopLinks = navLinks;
 
 export function SiteHeader() {
   const pathname = usePathname();
