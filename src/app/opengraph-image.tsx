@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "Ideal Driving School — Texas's Premier Driving Academy";
+export const alt = "Ideal Driving School, Texas's Premier Driving Academy";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -77,7 +77,7 @@ export default async function OpengraphImage() {
               color: "rgba(247,245,240,0.8)",
             }}
           >
-            TDLR-APPROVED · DALLAS–FORT WORTH
+            TDLR-APPROVED · DALLAS FORT WORTH
           </div>
         </div>
 
@@ -98,7 +98,7 @@ export default async function OpengraphImage() {
             for life.
           </div>
           <div style={{ marginTop: 26, fontSize: 30, color: "rgba(247,245,240,0.7)" }}>
-            Premium driver education across the Dallas–Fort Worth Metroplex.
+            Premium driver education across the Dallas Fort Worth Metroplex.
           </div>
         </div>
 

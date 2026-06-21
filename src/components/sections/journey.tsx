@@ -51,7 +51,7 @@ export function Journey() {
           eyebrow="The Ideal Journey"
           title="From first permit to fully licensed"
           highlight={["licensed"]}
-          description="Five deliberate stages, one calm path. Here's exactly how we take you from nervous beginner to confident, road-test-ready driver."
+          description="Five deliberate stages, one calm path. Here's exactly how we take you from nervous beginner to confident, road test ready driver."
         />
 
         <div ref={wrapRef} className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-2 lg:gap-16">

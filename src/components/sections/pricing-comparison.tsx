@@ -9,10 +9,10 @@ type Cell = boolean | string;
 const columns = ["Permit Starter", "Teen Complete", "Private Pro"];
 const rows: { label: string; values: [Cell, Cell, Cell] }[] = [
   { label: "Classroom instruction", values: ["Online prep", "32 hours", false] },
-  { label: "Behind-the-wheel hours", values: [false, "7 hours", "10 hours"] },
+  { label: "Behind the wheel hours", values: [false, "7 hours", "10 hours"] },
   { label: "Observation hours", values: [false, "7 hours", false] },
   { label: "Permit / knowledge prep", values: [true, true, "Add-on"] },
-  { label: "Pickup & drop-off", values: [false, "Optional", true] },
+  { label: "Pickup & drop off", values: [false, "Optional", true] },
   { label: "Female instructor option", values: [true, true, true] },
   { label: "Mock road test", values: [false, true, true] },
   { label: "Priority scheduling", values: [false, true, true] },

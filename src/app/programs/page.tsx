@@ -12,7 +12,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Programs",
   description:
-    "Teen and adult driver education, private lessons, permit prep, defensive driving, and 3rd-party road testing — TDLR-approved programs for every Texas driver.",
+    "Teen and adult driver education, private lessons, permit prep, defensive driving, and 3rd party road testing, TDLR approved programs for every Texas driver.",
 };
 
 export default function ProgramsPage() {
@@ -60,7 +60,7 @@ export default function ProgramsPage() {
             eyebrow="In Detail"
             title="Exactly what's included"
             highlight={["included"]}
-            description="No fine print, no surprises — here's precisely what each program covers and who it's built for."
+            description="No fine print, no surprises, here's precisely what each program covers and who it's built for."
           />
           <div className="mt-16">
             <ProgramDetails />
@@ -70,7 +70,7 @@ export default function ProgramsPage() {
 
       <CtaBand
         title="Not sure which program fits?"
-        description="Tell us your goals and we'll recommend the perfect path — no pressure, no obligation."
+        description="Tell us your goals and we'll recommend the perfect path, no pressure, no obligation."
         primary={{ label: "Talk to an advisor", href: "/contact" }}
       />
     </>

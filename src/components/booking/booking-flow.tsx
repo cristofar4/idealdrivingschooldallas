@@ -223,23 +223,23 @@ export function BookingFlow({ initialService }: { initialService?: string | null
             </div>
             <div className="space-y-4 p-6">
               <SummaryRow icon={<Icon name="car" className="size-4" />} label="Service">
-                {selectedProgram?.name ?? "—"}
+                {selectedProgram?.name ?? ", "}
               </SummaryRow>
               <SummaryRow icon={<CalendarIcon className="size-4" />} label="Date">
-                {date ? date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : "—"}
+                {date ? date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : ", "}
               </SummaryRow>
               <SummaryRow icon={<Clock className="size-4" />} label="Time">
-                {time || "—"}
+                {time || ", "}
               </SummaryRow>
               <SummaryRow icon={<User className="size-4" />} label="Instructor">
-                {instructor || "—"}
+                {instructor || ", "}
               </SummaryRow>
 
               <div className="border-t border-border pt-4">
                 <div className="flex items-end justify-between">
                   <span className="text-sm text-muted-foreground">Starting at</span>
                   <span className="font-display text-2xl font-bold">
-                    {selectedProgram?.price ?? "$—"}
+                    {selectedProgram?.price ?? "$, "}
                   </span>
                 </div>
                 {selectedProgram?.priceNote && (
@@ -525,7 +525,7 @@ function DetailsStep({
 }) {
   return (
     <div>
-      <StepTitle title="Almost there — your details" sub="We'll use these to confirm your booking. No payment required now." />
+      <StepTitle title="Almost there, your details" sub="We'll use these to confirm your booking. No payment required now." />
       <div className="mt-7 grid gap-5 sm:grid-cols-2">
         <Field label="Full name" required>
           <Input

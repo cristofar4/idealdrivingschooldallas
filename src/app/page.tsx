@@ -24,7 +24,7 @@ export default function HomePage() {
           eyebrow="Programs Built For You"
           title="Every path to a Texas license, under one roof"
           highlight={["license,"]}
-          description="From a teen's very first permit to an adult refresher or a same-day road test — choose the lane that fits, and we'll handle the rest."
+          description="From a teen's very first permit to an adult refresher or a same day road test, choose the lane that fits, and we'll handle the rest."
         />
         <div className="mt-14">
           <ProgramsShowcase />
@@ -67,7 +67,7 @@ export default function HomePage() {
           eyebrow="Simple, Honest Pricing"
           title="Clear packages. No surprises."
           highlight={["No", "surprises."]}
-          description="Transparent pricing with everything included — from paperwork to your mock road test. Pick a package or pay à la carte."
+          description="Transparent pricing with everything included, from paperwork to your mock road test. Pick a package or pay à la carte."
         />
         <div className="mt-14">
           <PricingCards />

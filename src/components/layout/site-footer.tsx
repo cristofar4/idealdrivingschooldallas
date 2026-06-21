@@ -109,7 +109,7 @@ export function SiteFooter() {
             </a>
           </ContactItem>
           <ContactItem icon={<Clock className="size-4" />} label="Hours">
-            Mon–Fri 9–7 · Sat 9–5 · Sun by appt.
+            Mon to Fri 9 to 7 · Sat 9 to 5 · Sun by appt.
           </ContactItem>
         </div>
       </div>
@@ -121,7 +121,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} {site.name}. Serving the {site.address.area}.
           </p>
           <p className="flex items-center gap-4">
-            <span>TDLR-Approved Driver Education</span>
+            <span>TDLR Approved Driver Education</span>
             <span className="hidden sm:inline">·</span>
             <Link href="/contact" className="hover:text-gold">
               Contact

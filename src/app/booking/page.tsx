@@ -5,7 +5,7 @@ import { BookingFlow } from "@/components/booking/booking-flow";
 export const metadata: Metadata = {
   title: "Book a Lesson",
   description:
-    "Reserve your driving lesson, class, or 3rd-party road test with Ideal Driving School in four simple steps. No payment required to book.",
+    "Reserve your driving lesson, class, or 3rd party road test with Ideal Driving School in four simple steps. No payment required to book.",
 };
 
 function normalize(v: string | string[] | undefined): string | null {
@@ -30,7 +30,7 @@ export default async function BookingPage({
         highlight={["four"]}
         scene="wheel"
         accent="gold"
-        description="Choose your service, pick a time, meet your instructor, and you're set. It takes about two minutes — and you can always adjust later."
+        description="Choose your service, pick a time, meet your instructor, and you're set. It takes about two minutes, and you can always adjust later."
       />
 
       <section className="container-px mx-auto max-w-[88rem] py-20 sm:py-24">

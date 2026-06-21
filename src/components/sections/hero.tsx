@@ -14,7 +14,7 @@ import { Scene } from "@/components/visuals/scene";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 const quickPicks = [
-  { label: "Teen Driver Ed", href: "/booking?plan=teen", note: "Ages 14–17" },
+  { label: "Teen Driver Ed", href: "/booking?plan=teen", note: "Ages 14 to 17" },
   { label: "Private Lessons", href: "/booking?plan=private", note: "Your pace" },
   { label: "Road Test", href: "/booking?service=road-test", note: "$80 · same day" },
 ];
@@ -54,7 +54,7 @@ export function Hero() {
               className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-xs font-medium backdrop-blur"
             >
               <ShieldCheck className="size-4 text-gold" />
-              <span className="text-cream/80">TDLR-Approved</span>
+              <span className="text-cream/80">TDLR Approved</span>
               <span className="h-3 w-px bg-white/15" />
               <span className="flex items-center gap-1 text-cream/80">
                 <Star className="size-3.5 fill-gold text-gold" /> 4.9 · 320+ reviews
@@ -75,8 +75,8 @@ export function Hero() {
               transition={{ duration: 0.8, ease: EASE, delay: 0.5 }}
               className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-cream/70 sm:text-lg"
             >
-              Ideal Driving School turns first-timers into calm, capable, road-test-ready drivers
-              across the {site.address.area} — with certified instructors and lessons built entirely
+              Ideal Driving School turns first timers into calm, capable, road test ready drivers
+              across the {site.address.area}, with certified instructors and lessons built entirely
               around you.
             </motion.p>
 
@@ -117,7 +117,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — quick booking card */}
+          {/* Right, quick booking card */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}

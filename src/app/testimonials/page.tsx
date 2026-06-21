@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Testimonials",
   description:
-    "Read real reviews from teens, parents, and adult learners who earned their license with Ideal Driving School in Dallas–Fort Worth. 4.9★ from 320+ reviews.",
+    "Read real reviews from teens, parents, and adult learners who earned their license with Ideal Driving School in Dallas Fort Worth. 4.9★ from 320+ reviews.",
 };
 
 const breakdown = [
@@ -32,7 +32,7 @@ export default function TestimonialsPage() {
         title="The reviews that mean the most"
         highlight={["reviews"]}
         scene="sunrise"
-        description="We're proud of our pass rate — but we're proudest of the families who trust us, return to us, and recommend us to their neighbors across North Texas."
+        description="We're proud of our pass rate, but we're proudest of the families who trust us, return to us, and recommend us to their neighbors across North Texas."
       />
 
       {/* Rating summary */}

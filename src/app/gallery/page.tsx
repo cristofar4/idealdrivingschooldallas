@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Gallery",
   description:
-    "A look inside the Ideal Driving School experience — from first lessons to test-day success across the Dallas–Fort Worth Metroplex.",
+    "A look inside the Ideal Driving School experience, from first lessons to test-day success across the Dallas Fort Worth Metroplex.",
 };
 
 export default function GalleryPage() {

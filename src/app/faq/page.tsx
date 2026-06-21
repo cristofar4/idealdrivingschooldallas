@@ -11,7 +11,7 @@ import { faqCategories, site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "FAQ",
   description:
-    "Answers to common questions about teen and adult driver education, road tests, scheduling, and pricing at Ideal Driving School in Dallas–Fort Worth.",
+    "Answers to common questions about teen and adult driver education, road tests, scheduling, and pricing at Ideal Driving School in Dallas Fort Worth.",
 };
 
 export default function FaqPage() {

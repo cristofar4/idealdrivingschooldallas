@@ -39,7 +39,7 @@ function isEmail(v: string) {
 function record(tag: string, payload: object, res: SendResult) {
   if (res.delivered) return;
   if (res.error === "not-configured") {
-    console.log(`[${tag}] email not configured — logged`, { ...payload, receivedAt: new Date().toISOString() });
+    console.log(`[${tag}] email not configured, logged`, { ...payload, receivedAt: new Date().toISOString() });
   } else {
     console.error(`[${tag}] email delivery failed: ${res.error}`, { ...payload, receivedAt: new Date().toISOString() });
   }

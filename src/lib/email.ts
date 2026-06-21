@@ -6,11 +6,11 @@ import type { BookingPayload, ContactPayload } from "@/app/actions";
  * Email delivery adapter (Resend).
  *
  * Configure via environment variables:
- *   RESEND_API_KEY     — your Resend API key (required to actually send)
- *   CONTACT_TO_EMAIL   — where leads are delivered (defaults to site email)
- *   CONTACT_FROM_EMAIL — verified sender, e.g. "Ideal <hello@yourdomain.com>"
+ *   RESEND_API_KEY, your Resend API key (required to actually send)
+ *   CONTACT_TO_EMAIL, where leads are delivered (defaults to site email)
+ *   CONTACT_FROM_EMAIL, verified sender, e.g. "Ideal <hello@yourdomain.com>"
  *
- * Without RESEND_API_KEY the app still works — submissions are logged
+ * Without RESEND_API_KEY the app still works, submissions are logged
  * server-side instead of emailed, so dev and previews never break.
  */
 
@@ -27,7 +27,7 @@ const resend = apiKey ? new Resend(apiKey) : null;
 function row(label: string, value: string) {
   return `<tr>
     <td style="padding:8px 0;color:#5f6675;font:600 12px/1.4 system-ui;text-transform:uppercase;letter-spacing:1px;width:140px;vertical-align:top">${label}</td>
-    <td style="padding:8px 0;color:#131722;font:400 15px/1.5 system-ui">${value || "—"}</td>
+    <td style="padding:8px 0;color:#131722;font:400 15px/1.5 system-ui">${value || ", "}</td>
   </tr>`;
 }
 
@@ -59,7 +59,7 @@ export async function sendContactEmail(p: ContactPayload): Promise<SendResult> {
     from: fromEmail,
     to: [toEmail],
     replyTo: p.email,
-    subject: `New inquiry — ${p.interest} (${p.name})`,
+    subject: `New inquiry, ${p.interest} (${p.name})`,
     html,
   });
   return error ? { delivered: false, error: error.message } : { delivered: true };
@@ -84,7 +84,7 @@ export async function sendBookingEmail(p: BookingPayload): Promise<SendResult> {
     from: fromEmail,
     to: [toEmail],
     replyTo: p.email,
-    subject: `New booking — ${p.service} (${p.name})`,
+    subject: `New booking, ${p.service} (${p.name})`,
     html,
   });
   return error ? { delivered: false, error: error.message } : { delivered: true };

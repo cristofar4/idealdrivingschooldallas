@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Transparent driving school pricing in Dallas–Fort Worth. Teen programs from $399, private lessons from $60/hr, 3rd-party road test $80. No hidden fees.",
+    "Transparent driving school pricing in Dallas Fort Worth. Teen programs from $399, private lessons from $60/hr, 3rd party road test $80. No hidden fees.",
 };
 
 export default function PricingPage() {
@@ -25,7 +25,7 @@ export default function PricingPage() {
         highlight={["included"]}
         scene="map"
         accent="teal"
-        description="No hidden fees, no upsells at the curb. Choose a complete package or pay only for the services you need — the price you see is the price you pay."
+        description="No hidden fees, no upsells at the curb. Choose a complete package or pay only for the services you need, the price you see is the price you pay."
       >
         <Button asChild variant="gold" size="lg">
           <Link href="/booking">
@@ -40,14 +40,14 @@ export default function PricingPage() {
           eyebrow="Packages"
           title="Pick the package that fits"
           highlight={["fits"]}
-          description="Every package includes paperwork support, certified instructors, and our calm, judgment-free teaching style."
+          description="Every package includes paperwork support, certified instructors, and our calm, judgment free teaching style."
         />
         <div className="mt-16">
           <PricingCards />
         </div>
         <p className="mx-auto mt-10 flex max-w-xl items-center justify-center gap-2 text-center text-sm text-muted-foreground">
           <ShieldCheck className="size-4 text-gold-deep" />
-          Flexible payment options available · TDLR-approved curriculum
+          Flexible payment options available · TDLR approved curriculum
         </p>
       </section>
 

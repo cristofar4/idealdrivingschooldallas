@@ -53,7 +53,7 @@ export function SiteHeader() {
                 : "h-16 bg-transparent",
             )}
           >
-            <Link href="/" aria-label="Ideal Driving School — home" className="shrink-0">
+            <Link href="/" aria-label="Ideal Driving School, home" className="shrink-0">
               <Logo invert={!scrolled} />
             </Link>
 

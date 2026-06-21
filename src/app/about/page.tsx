@@ -15,7 +15,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Meet Ideal Driving School — TDLR-approved driver education built on patience, safety, and genuine care, serving the Dallas–Fort Worth Metroplex since 2008.",
+    "Meet Ideal Driving School, TDLR approved driver education built on patience, safety, and genuine care, serving the Dallas Fort Worth Metroplex since 2008.",
 };
 
 const values = [
@@ -26,8 +26,8 @@ const values = [
   },
   {
     icon: ShieldCheck,
-    title: "Safety is non-negotiable",
-    body: "Dual-control vehicles, certified instructors, and habits built to last a lifetime — not just until test day.",
+    title: "Safety is non negotiable",
+    body: "Dual control vehicles, certified instructors, and habits built to last a lifetime, not just until test day.",
   },
   {
     icon: Target,
@@ -45,7 +45,7 @@ export default function AboutPage() {
         title="Driven by patience. Defined by trust."
         highlight={["trust."]}
         scene="sunrise"
-        description={`For over 17 years, Ideal Driving School has helped DFW families turn nervous beginners into confident, lifelong drivers — one calm lesson at a time.`}
+        description={`For over 17 years, Ideal Driving School has helped DFW families turn nervous beginners into confident, lifelong drivers, one calm lesson at a time.`}
       >
         <Button asChild variant="gold" size="lg">
           <Link href="/booking">
@@ -80,17 +80,16 @@ export default function AboutPage() {
             <div className="mt-6 space-y-4 text-pretty leading-relaxed text-muted-foreground">
               <p>
                 Ideal Driving School began with a simple frustration: driving lessons that felt
-                rushed, impersonal, and intimidating. We believed Texas families deserved better —
-                so we built it.
+                rushed, impersonal, and intimidating. We believed Texas families deserved better, so we built it.
               </p>
               <p>
-                Today, from our home in Plano we serve the entire Dallas–Fort Worth Metroplex with
-                TDLR-approved teen and adult education, private behind-the-wheel coaching, and
-                same-day third-party road testing. What hasn&apos;t changed is the philosophy:
+                Today, from our home in Plano we serve the entire Dallas Fort Worth Metroplex with
+                TDLR approved teen and adult education, private behind the wheel coaching, and
+                same day third party road testing. What hasn&apos;t changed is the philosophy:
                 teach calmly, teach thoroughly, and treat every student like family.
               </p>
               <p>
-                The result is a road-test pass rate we&apos;re proud of — and thousands of drivers
+                The result is a road test pass rate we&apos;re proud of, and thousands of drivers
                 across North Texas who learned to love the road, safely.
               </p>
             </div>
@@ -102,7 +101,7 @@ export default function AboutPage() {
               </div>
               <div>
                 <p className="font-display text-3xl font-bold text-gold-deep">98%</p>
-                <p className="text-sm text-muted-foreground">First-attempt pass rate</p>
+                <p className="text-sm text-muted-foreground">First attempt pass rate</p>
               </div>
               <div>
                 <p className="font-display text-3xl font-bold text-gold-deep">4.9★</p>
@@ -147,7 +146,7 @@ export default function AboutPage() {
           eyebrow="Credentials & Safety"
           title="Held to the highest standard"
           highlight={["highest"]}
-          description="Every instructor, vehicle, and certificate meets or exceeds Texas requirements — so the only thing you focus on is driving."
+          description="Every instructor, vehicle, and certificate meets or exceeds Texas requirements, so the only thing you focus on is driving."
         />
         <div className="mt-12">
           <Credentials />

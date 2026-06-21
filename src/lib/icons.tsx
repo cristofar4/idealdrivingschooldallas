@@ -45,7 +45,7 @@ function SteeringWheel(props: LucideProps) {
   );
 }
 
-/** Brand glyphs — lucide removed these for trademark reasons. */
+/** Brand glyphs, lucide removed these for trademark reasons. */
 function FacebookIcon(props: LucideProps) {
   const { size = 24, className, ...rest } = props;
   return (

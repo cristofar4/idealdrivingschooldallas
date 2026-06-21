@@ -21,7 +21,7 @@ export function Instructors({ withHeading = true }: { withHeading?: boolean }) {
           eyebrow="The People Who Teach You"
           title="Certified instructors who genuinely care"
           highlight={["care"]}
-          description="Calm, background-checked, and endlessly patient — these are the people parents request by name and students never forget."
+          description="Calm, background checked, and endlessly patient, these are the people parents request by name and students never forget."
         />
       )}
 

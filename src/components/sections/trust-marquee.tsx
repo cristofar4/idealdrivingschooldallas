@@ -12,7 +12,7 @@ export function TrustMarquee() {
     <section className="relative border-y border-border bg-background py-8">
       <div className="container-px mx-auto mb-6 max-w-[88rem]">
         <p className="text-center text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-          Trusted across the Dallas–Fort Worth Metroplex
+          Trusted across the Dallas Fort Worth Metroplex
         </p>
       </div>
       <Marquee>

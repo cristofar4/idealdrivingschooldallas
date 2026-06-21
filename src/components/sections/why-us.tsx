@@ -6,7 +6,7 @@ import { differentiators } from "@/lib/site";
 import { Icon, type IconName } from "@/lib/icons";
 import { SectionHeading } from "@/components/sections/section-heading";
 import { StaggerGroup, StaggerItem, Reveal } from "@/components/anim/reveal";
-import { Scene } from "@/components/visuals/scene";
+import { DrivingScene } from "@/components/visuals/driving-scene";
 import { Button } from "@/components/ui/button";
 
 export function WhyUs() {
@@ -16,9 +16,7 @@ export function WhyUs() {
         {/* Left: visual */}
         <Reveal className="order-2 lg:order-1">
           <div className="relative">
-            <div className="relative aspect-square overflow-hidden rounded-[2rem] border border-border">
-              <Scene kind="lesson" accent="gold" />
-            </div>
+            <DrivingScene className="aspect-square rounded-[2rem] border border-border" />
             {/* floating credential card */}
             <div className="absolute -bottom-6 -right-4 w-60 rounded-2xl border border-border bg-card p-5 shadow-[0_30px_60px_-30px_rgba(8,11,20,0.4)] sm:-right-8">
               <div className="flex items-center gap-3">
@@ -46,7 +44,7 @@ export function WhyUs() {
             eyebrow="Why families choose Ideal"
             title="A premium standard, set behind every wheel"
             highlight={["premium"]}
-            description="We didn't just modernize driving lessons — we rebuilt the experience around safety, patience, and people. Here's what makes Ideal different."
+            description="We didn't just modernize driving lessons, we rebuilt the experience around safety, patience, and people. Here's what makes Ideal different."
           />
 
           <StaggerGroup className="mt-10 grid gap-5 sm:grid-cols-2">

@@ -132,6 +132,11 @@
   --animate-spin-slow: spin 22s linear infinite;
   --animate-accordion-down: accordion-down 0.3s var(--ease-out-expo);
   --animate-accordion-up: accordion-up 0.3s var(--ease-out-expo);
+  --animate-road: road 0.5s linear infinite;
+  --animate-bob: bob 2.6s ease-in-out infinite;
+  --animate-streak: streak 0.8s linear infinite;
+  --animate-drift: drift 26s linear infinite;
+  --animate-wheel: spin 0.55s linear infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -160,6 +165,23 @@
   @keyframes accordion-up {
     from { height: var(--radix-accordion-content-height); }
     to { height: 0; }
+  }
+  @keyframes road {
+    from { background-position: 0 0; }
+    to { background-position: -56px 0; }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  @keyframes streak {
+    0% { opacity: 0; transform: translateX(12px) scaleX(0.6); }
+    35% { opacity: 1; }
+    100% { opacity: 0; transform: translateX(-30px) scaleX(1.4); }
+  }
+  @keyframes drift {
+    from { transform: translateX(8%); }
+    to { transform: translateX(-12%); }
   }
 }
 

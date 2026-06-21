@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Ideal Driving School in Plano, TX. Call (214) 884-5350, email us, or visit 4101 E. Park Blvd. Serving the Dallas–Fort Worth Metroplex.",
+    "Get in touch with Ideal Driving School in Plano, TX. Call (214) 884-5350, email us, or visit 4101 E. Park Blvd. Serving the Dallas Fort Worth Metroplex.",
 };
 
 export default function ContactPage() {
@@ -24,7 +24,7 @@ export default function ContactPage() {
         highlight={["love"]}
         scene="map"
         accent="rose"
-        description="Questions about a program, scheduling, or pricing? Reach out and a real person will get back to you fast — usually the same day."
+        description="Questions about a program, scheduling, or pricing? Reach out and a real person will get back to you fast, usually the same day."
       />
 
       <section className="container-px mx-auto max-w-[88rem] py-20 sm:py-24">
