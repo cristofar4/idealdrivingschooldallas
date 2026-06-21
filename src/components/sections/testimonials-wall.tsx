@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Play, Quote, Star, X } from "lucide-react";
 import { testimonials, type Testimonial } from "@/lib/site";
@@ -92,6 +92,19 @@ export function TestimonialsWall({ limit }: { limit?: number }) {
 }
 
 function StoryModal({ item, onClose }: { item: Testimonial | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!item) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [item, onClose]);
+
   return (
     <AnimatePresence>
       {item && (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -12,10 +12,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Clock,
+  Loader2,
   PartyPopper,
   Sparkles,
   User,
 } from "lucide-react";
+import { submitBooking } from "@/app/actions";
 import { programs, instructors, site } from "@/lib/site";
 import { Icon, type IconName } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -51,8 +53,29 @@ export function BookingFlow({ initialService }: { initialService?: string | null
   const [instructor, setInstructor] = useState("");
   const [details, setDetails] = useState<Details>({ name: "", email: "", phone: "", notes: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
 
   const selectedProgram = programs.find((p) => p.slug === service);
+
+  function confirm() {
+    if (pending) return;
+    setError(null);
+    startTransition(async () => {
+      const res = await submitBooking({
+        service: selectedProgram?.name ?? service,
+        date: date ? date.toISOString() : null,
+        time,
+        instructor,
+        name: details.name,
+        email: details.email,
+        phone: details.phone,
+        notes: details.notes,
+      });
+      if (res.ok) setSubmitted(true);
+      else setError(res.error ?? "Something went wrong. Please call us to book.");
+    });
+  }
 
   const canProceed = useMemo(() => {
     if (step === 0) return !!service;
@@ -165,11 +188,25 @@ export function BookingFlow({ initialService }: { initialService?: string | null
               Continue <ArrowRight className="size-4" />
             </Button>
           ) : (
-            <Button variant="gold" size="lg" disabled={!canProceed} onClick={() => setSubmitted(true)}>
-              Confirm booking <CheckCircle2 className="size-4" />
+            <Button variant="gold" size="lg" disabled={!canProceed || pending} onClick={confirm}>
+              {pending ? (
+                <>
+                  Booking… <Loader2 className="size-4 animate-spin" />
+                </>
+              ) : (
+                <>
+                  Confirm booking <CheckCircle2 className="size-4" />
+                </>
+              )}
             </Button>
           )}
         </div>
+
+        {error && (
+          <p className="mt-4 rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+            {error}
+          </p>
+        )}
       </div>
 
       {/* Summary */}

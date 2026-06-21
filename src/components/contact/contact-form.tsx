@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CheckCircle2, Send } from "lucide-react";
+import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { submitContact } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,13 +16,20 @@ export function ContactForm() {
   const [interest, setInterest] = useState("Teen Driver Ed");
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
 
   const valid = form.name && form.email.includes("@") && form.message.length > 4;
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!valid) return;
-    setSent(true);
+    if (!valid || pending) return;
+    setError(null);
+    startTransition(async () => {
+      const res = await submitContact({ ...form, interest });
+      if (res.ok) setSent(true);
+      else setError(res.error ?? "Something went wrong. Please call us instead.");
+    });
   }
 
   return (
@@ -127,8 +135,22 @@ export function ContactForm() {
               />
             </div>
 
-            <Button type="submit" variant="gold" size="lg" disabled={!valid} className="w-full">
-              Send message <Send className="size-4" />
+            {error && (
+              <p className="rounded-xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                {error}
+              </p>
+            )}
+
+            <Button type="submit" variant="gold" size="lg" disabled={!valid || pending} className="w-full">
+              {pending ? (
+                <>
+                  Sending… <Loader2 className="size-4 animate-spin" />
+                </>
+              ) : (
+                <>
+                  Send message <Send className="size-4" />
+                </>
+              )}
             </Button>
           </motion.form>
         )}
