@@ -10,13 +10,17 @@
  * The access key is safe to make public — it only lets people send YOU mail.
  */
 
-const FALLBACK_KEY = "PASTE_YOUR_ACCESS_KEY_HERE";
+const PLACEHOLDER = "PASTE_YOUR_ACCESS_KEY_HERE";
+
+/** Your Web3Forms access key (emails form submissions to your inbox). */
+const ACCESS_KEY = "9310ca5f-5942-4951-b166-5e9e5cc2e347";
 
 export const WEB3FORMS_ACCESS_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_KEY?.trim() || FALLBACK_KEY;
+  process.env.NEXT_PUBLIC_WEB3FORMS_KEY?.trim() || ACCESS_KEY;
 
 /** True once a real access key has been provided. */
-export const formsConfigured = WEB3FORMS_ACCESS_KEY !== FALLBACK_KEY;
+export const formsConfigured =
+  WEB3FORMS_ACCESS_KEY.length > 10 && WEB3FORMS_ACCESS_KEY !== PLACEHOLDER;
 
 export type SubmitResult = { ok: boolean; error?: string };
 
