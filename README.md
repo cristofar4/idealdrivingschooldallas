@@ -62,6 +62,24 @@ pnpm start      # serve the production build
 pnpm lint
 ```
 
+## ✉️ Email setup (Contact & Booking forms)
+
+Both forms submit via **server actions** (`src/app/actions.ts`) and deliver leads
+through a **Resend** adapter (`src/lib/email.ts`). Copy the example env file and add
+your key:
+
+```bash
+cp .env.example .env.local
+# then set RESEND_API_KEY (and optionally CONTACT_TO_EMAIL / CONTACT_FROM_EMAIL)
+```
+
+- **With** `RESEND_API_KEY`: submissions are emailed (branded HTML, reply-to set to the visitor).
+- **Without** it: submissions are validated and logged server-side, so the site works in
+  every environment with no broken state.
+
+Prefer SMTP/SendGrid/a webhook? Swap the two `send*` functions in `src/lib/email.ts` —
+the server actions stay unchanged.
+
 ## 🏢 Business
 
 **Ideal Driving School** · 4101 E. Park Blvd, Suite 147, Plano, TX 75074

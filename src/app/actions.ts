@@ -1,11 +1,13 @@
 "use server";
 
+import { sendBookingEmail, sendContactEmail, type SendResult } from "@/lib/email";
+
 /**
  * Server actions for form submissions.
  *
- * These validate input on the server and return a typed result. To deliver
- * the data, plug your provider into the marked TODO (e.g. Resend/SendGrid for
- * email, or a CRM/webhook). Submissions are logged server-side until then.
+ * Validates input on the server, then delivers the lead via the email adapter
+ * (Resend). When email isn't configured the submission is logged server-side
+ * instead, so the form always works. See src/lib/email.ts for setup.
  */
 
 export type ActionResult = { ok: boolean; error?: string };
@@ -33,18 +35,24 @@ function isEmail(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 }
 
+/** Record the lead server-side when email isn't configured, or log send errors. */
+function record(tag: string, payload: object, res: SendResult) {
+  if (res.delivered) return;
+  if (res.error === "not-configured") {
+    console.log(`[${tag}] email not configured — logged`, { ...payload, receivedAt: new Date().toISOString() });
+  } else {
+    console.error(`[${tag}] email delivery failed: ${res.error}`, { ...payload, receivedAt: new Date().toISOString() });
+  }
+}
+
 export async function submitContact(payload: ContactPayload): Promise<ActionResult> {
   if (!payload.name?.trim()) return { ok: false, error: "Please enter your name." };
   if (!isEmail(payload.email)) return { ok: false, error: "Please enter a valid email." };
   if (!payload.message?.trim() || payload.message.trim().length < 5)
     return { ok: false, error: "Please add a short message." };
 
-  // TODO: forward to your email service / CRM here.
-  console.log("[ideal:contact]", {
-    ...payload,
-    receivedAt: new Date().toISOString(),
-  });
-
+  const res = await sendContactEmail(payload);
+  record("ideal:contact", payload, res);
   return { ok: true };
 }
 
@@ -54,11 +62,7 @@ export async function submitBooking(payload: BookingPayload): Promise<ActionResu
   if (!isEmail(payload.email)) return { ok: false, error: "Please enter a valid email." };
   if (!payload.phone?.trim()) return { ok: false, error: "Please enter a phone number." };
 
-  // TODO: forward to your scheduling system / email / CRM here.
-  console.log("[ideal:booking]", {
-    ...payload,
-    receivedAt: new Date().toISOString(),
-  });
-
+  const res = await sendBookingEmail(payload);
+  record("ideal:booking", payload, res);
   return { ok: true };
 }
