@@ -4,14 +4,36 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
-import { Menu, Phone, X, ArrowUpRight } from "lucide-react";
+import { Menu, Phone, X, ArrowUpRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, site } from "@/lib/site";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/anim/magnetic";
 
-const desktopLinks = navLinks;
+type NavNode = { label: string; href?: string; children?: { label: string; href: string }[] };
+
+const primaryNav: NavNode[] = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  {
+    label: "Programs",
+    children: [
+      { label: "All Programs", href: "/programs" },
+      { label: "Road Test", href: "/road-test" },
+      { label: "Pricing", href: "/pricing" },
+    ],
+  },
+  {
+    label: "More",
+    children: [
+      { label: "Testimonials", href: "/testimonials" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "FAQ", href: "/faq" },
+    ],
+  },
+  { label: "Contact", href: "/contact" },
+];
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -57,25 +79,38 @@ export function SiteHeader() {
               <Logo invert={!scrolled} />
             </Link>
 
-            <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
-              {desktopLinks.map((link) => {
-                const active = pathname === link.href;
+            <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+              {primaryNav.map((item) => {
+                const colorClass = (active: boolean) =>
+                  scrolled
+                    ? active
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                    : active
+                      ? "text-cream"
+                      : "text-cream/70 hover:text-cream";
+
+                if (item.children) {
+                  return (
+                    <NavDropdown
+                      key={item.label}
+                      item={item}
+                      pathname={pathname}
+                      colorClass={colorClass}
+                    />
+                  );
+                }
+                const active = pathname === item.href;
                 return (
                   <Link
-                    key={link.href}
-                    href={link.href}
+                    key={item.href}
+                    href={item.href!}
                     className={cn(
                       "group relative rounded-full px-3.5 py-2 text-[0.82rem] font-medium transition-colors",
-                      scrolled
-                        ? active
-                          ? "text-foreground"
-                          : "text-muted-foreground hover:text-foreground"
-                        : active
-                          ? "text-cream"
-                          : "text-cream/70 hover:text-cream",
+                      colorClass(active),
                     )}
                   >
-                    {link.label}
+                    {item.label}
                     <span
                       className={cn(
                         "absolute inset-x-3.5 -bottom-0.5 h-px origin-left scale-x-0 bg-gold transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100",
@@ -135,6 +170,59 @@ export function SiteHeader() {
 
       <MobileMenu open={open} onClose={() => setOpen(false)} pathname={pathname} />
     </>
+  );
+}
+
+function NavDropdown({
+  item,
+  pathname,
+  colorClass,
+}: {
+  item: NavNode;
+  pathname: string;
+  colorClass: (active: boolean) => string;
+}) {
+  const children = item.children ?? [];
+  const active = children.some((c) => c.href === pathname);
+
+  return (
+    <div className="group relative">
+      <button
+        type="button"
+        aria-haspopup="true"
+        className={cn(
+          "inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-[0.82rem] font-medium transition-colors",
+          colorClass(active),
+        )}
+      >
+        {item.label}
+        <ChevronDown className="size-3.5 transition-transform duration-300 group-hover:rotate-180" />
+      </button>
+
+      {/* hover bridge + panel */}
+      <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+        <div className="min-w-[13rem] rounded-2xl border border-border bg-popover p-2 shadow-[0_30px_60px_-25px_rgba(8,11,20,0.45)]">
+          {children.map((c) => {
+            const isActive = pathname === c.href;
+            return (
+              <Link
+                key={c.href}
+                href={c.href}
+                className={cn(
+                  "flex items-center justify-between rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                  isActive
+                    ? "bg-gold/10 text-gold-deep"
+                    : "text-foreground/80 hover:bg-foreground/[0.05] hover:text-foreground",
+                )}
+              >
+                {c.label}
+                {isActive && <span className="size-1.5 rounded-full bg-gold" />}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 }
 
