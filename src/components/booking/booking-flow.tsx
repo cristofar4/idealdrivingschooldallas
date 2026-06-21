@@ -17,7 +17,7 @@ import {
   Sparkles,
   User,
 } from "lucide-react";
-import { submitBooking } from "@/app/actions";
+import { sendViaWeb3Forms } from "@/lib/web3forms";
 import { programs, instructors, site } from "@/lib/site";
 import { Icon, type IconName } from "@/lib/icons";
 import { cn } from "@/lib/utils";
@@ -61,15 +61,20 @@ export function BookingFlow({ initialService }: { initialService?: string | null
   function confirm() {
     if (pending) return;
     setError(null);
+    const serviceName = selectedProgram?.name ?? service;
+    const when = date
+      ? `${date.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}${time ? ` at ${time}` : ""}`
+      : "To be confirmed";
     startTransition(async () => {
-      const res = await submitBooking({
-        service: selectedProgram?.name ?? service,
-        date: date ? date.toISOString() : null,
-        time,
-        instructor,
+      const res = await sendViaWeb3Forms({
+        subject: `New booking request — ${serviceName}`,
+        from_name: "Ideal Driving School Website",
         name: details.name,
         email: details.email,
         phone: details.phone,
+        service: serviceName,
+        when,
+        instructor: instructor || "Any available",
         notes: details.notes,
       });
       if (res.ok) setSubmitted(true);

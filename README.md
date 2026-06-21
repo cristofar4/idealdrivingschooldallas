@@ -64,21 +64,16 @@ pnpm lint
 
 ## ✉️ Email setup (Contact & Booking forms)
 
-Both forms submit via **server actions** (`src/app/actions.ts`) and deliver leads
-through a **Resend** adapter (`src/lib/email.ts`). Copy the example env file and add
-your key:
+Both forms email you submissions via **Web3Forms** — no account or server needed.
 
-```bash
-cp .env.example .env.local
-# then set RESEND_API_KEY (and optionally CONTACT_TO_EMAIL / CONTACT_FROM_EMAIL)
-```
+1. Go to **[web3forms.com](https://web3forms.com)**, enter the email where you want
+   messages, and copy the **Access Key**.
+2. Paste it into `src/lib/web3forms.ts` (replace `PASTE_YOUR_ACCESS_KEY_HERE`), or set
+   `NEXT_PUBLIC_WEB3FORMS_KEY` in `.env.local`.
 
-- **With** `RESEND_API_KEY`: submissions are emailed (branded HTML, reply-to set to the visitor).
-- **Without** it: submissions are validated and logged server-side, so the site works in
-  every environment with no broken state.
-
-Prefer SMTP/SendGrid/a webhook? Swap the two `send*` functions in `src/lib/email.ts` —
-the server actions stay unchanged.
+That's it — every submission arrives in your inbox, with the visitor's email as
+reply-to. The access key is safe to be public (it only lets people send *you* mail).
+Until a key is set, the forms politely ask visitors to call instead.
 
 ## 🏢 Business
 

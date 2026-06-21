@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { submitContact } from "@/app/actions";
+import { sendViaWeb3Forms } from "@/lib/web3forms";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,7 +26,15 @@ export function ContactForm() {
     if (!valid || pending) return;
     setError(null);
     startTransition(async () => {
-      const res = await submitContact({ ...form, interest });
+      const res = await sendViaWeb3Forms({
+        subject: `New website inquiry — ${interest}`,
+        from_name: "Ideal Driving School Website",
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        interest,
+        message: form.message,
+      });
       if (res.ok) setSent(true);
       else setError(res.error ?? "Something went wrong. Please call us instead.");
     });
